@@ -1,16 +1,25 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import exporess from 'express';
+import { StaticRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../src/store/store'
 import App from '../src/App';
 
 const app = exporess();
 app.use(exporess.static('public'))
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   // const Page = <App title="开课吧"></App>
 
   // 把react组件，解析成html
-  const content = renderToString(App)
+  const content = renderToString(
+    <Provider store={store}>
+      <StaticRouter location={req.url}>
+        { App }
+      </StaticRouter>
+    </Provider>
+  )
 
   res.send(`
     <html>
