@@ -10,4 +10,4 @@ function App(props) {
   )
 }
 
-export default <App title="你好，开课吧" />;
+export default <App title="你好，开课吧，很高兴学习新的知识" />;
